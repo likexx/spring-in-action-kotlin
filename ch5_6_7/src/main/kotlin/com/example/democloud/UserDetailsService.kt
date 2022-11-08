@@ -18,44 +18,14 @@ import org.springframework.stereotype.Service
 import java.util.*
 import kotlin.collections.ArrayList
 
-//@Bean
-//fun userAuthService(@Autowired encoder: PasswordEncoder): UserDetailsService? {
-//    val usersList: MutableList<UserDetails> = ArrayList()
-//    usersList.add(
-//        User(
-//            "buzz", encoder.encode("password"),
-//            Arrays.asList(SimpleGrantedAuthority("ROLE_USER"))
-//        )
-//    )
-//    usersList.add(
-//        User(
-//            "woody", encoder.encode("password"),
-//            Arrays.asList(SimpleGrantedAuthority("ROLE_USER"))
-//        )
-//    )
-//    return InMemoryUserDetailsManager(usersList)
-//}
-
 @Service
-class DemoUserDetailsService: UserDetailsService {
+class DemoUserDetailsService(@Autowired val repo: UserRepository): UserDetailsService {
+    companion object {
+        val log: Logger? = LoggerFactory.getLogger(this::class.java)
+    }
+
     override fun loadUserByUsername(username: String?): UserDetails {
-        val encoder = BCryptPasswordEncoder()
-        return User(
-            "buzz", encoder.encode("password"),
-            Arrays.asList(SimpleGrantedAuthority("ROLE_USER"))
-        )
+        log?.debug("loadUserByUsername: $username")
+        return repo.findByUsername(username!!)
     }
 }
-
-//@Service
-//open class DemoUserDetailsService(@Autowired val repo: UserRepository) : UserDetailsService {
-//    companion object {
-//        val log: Logger? = LoggerFactory.getLogger(this::class.java)
-//    }
-//
-//    override fun loadUserByUsername(username: String): UserDetails {
-//        log?.debug("======> loadUserByUsername $username")
-////        return repo.findByUsername(username)
-//        return User("guest", "12345")
-//    }
-//}
