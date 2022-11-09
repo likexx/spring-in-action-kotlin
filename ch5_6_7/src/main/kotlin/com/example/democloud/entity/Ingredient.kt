@@ -1,7 +1,9 @@
-package com.example.democloud
+package com.example.democloud.entity
 
-import java.util.UUID
-import javax.persistence.*
+import javax.persistence.Entity
+import javax.persistence.EnumType
+import javax.persistence.Enumerated
+import javax.persistence.Id
 
 @Entity
 class Ingredient() {

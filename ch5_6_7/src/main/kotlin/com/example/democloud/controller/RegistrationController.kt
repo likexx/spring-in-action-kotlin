@@ -1,8 +1,7 @@
 package com.example.democloud.controller
 
-import com.example.democloud.User
-import com.example.democloud.UserRepository
-import com.example.democloud.config.SecurityConfig
+import com.example.democloud.entity.User
+import com.example.democloud.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Controller

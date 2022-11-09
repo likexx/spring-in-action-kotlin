@@ -1,11 +1,9 @@
-package com.example.democloud
+package com.example.democloud.entity
 
-import org.hibernate.validator.constraints.CreditCardNumber
 import java.util.*
 import javax.persistence.*
 import javax.validation.constraints.Digits
 import javax.validation.constraints.NotBlank
-import javax.validation.constraints.Pattern
 
 @Entity
 class TacoOrder {
@@ -28,11 +26,13 @@ class TacoOrder {
     @NotBlank
     var deliveryZip = ""
 
-    @CreditCardNumber
+    //    @CreditCardNumber
+    @NotBlank
     var ccNumber = ""
 
-    @Pattern(regexp="^(0[1-9]|1[0-2])([\\/])([2-9][0-9])$",
-        message="Must be formatted MM/YY")
+    //    @Pattern(regexp="^(0[1-9]|1[0-2])([\\/])([2-9][0-9])$",
+//        message="Must be formatted MM/YY")
+    @NotBlank
     var ccExpiration = ""
 
     @Digits(integer=3, fraction=0, message="Invalid CVV")
@@ -43,7 +43,7 @@ class TacoOrder {
     @OneToMany
     var tacos = mutableListOf<Taco>()
 
-    fun addTaco(taco:Taco) {
+    fun addTaco(taco: Taco) {
         tacos.add(taco)
     }
 }

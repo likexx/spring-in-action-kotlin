@@ -1,5 +1,9 @@
-package com.example.democloud
+package com.example.democloud.controller
 
+import com.example.democloud.entity.Ingredient
+import com.example.democloud.entity.Taco
+import com.example.democloud.entity.TacoOrder
+import com.example.democloud.repository.IngredientRepository
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -24,7 +28,7 @@ public class DesignTacoController (@Autowired val ingredientRepository: Ingredie
 
     @ModelAttribute
     fun addIngredientsToModel(model: Model) {
-        val ingredients = ingredientRepository.findAll()
+        val ingredients:MutableCollection<Ingredient> = ingredientRepository.findAll() as MutableCollection<Ingredient>
 
         val groups = ingredients.associateBy { it.type }
 
@@ -52,7 +56,8 @@ public class DesignTacoController (@Autowired val ingredientRepository: Ingredie
     @PostMapping
     fun processTaco(@Valid taco: Taco,
                     errors: Errors,
-                    @ModelAttribute tacoOrder: TacoOrder): String {
+                    @ModelAttribute tacoOrder: TacoOrder
+    ): String {
         log?.info("name: ${taco.name}, ingredients: ${taco.ingredients.size}")
         if (errors.hasErrors()) {
             for (err in errors.allErrors) {

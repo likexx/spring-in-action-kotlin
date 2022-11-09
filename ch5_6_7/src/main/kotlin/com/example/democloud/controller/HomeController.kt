@@ -1,4 +1,4 @@
-package com.example.democloud
+package com.example.democloud.controller
 
 import org.springframework.stereotype.Component
 import org.springframework.stereotype.Controller

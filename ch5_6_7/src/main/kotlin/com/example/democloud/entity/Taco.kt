@@ -1,19 +1,16 @@
-package com.example.democloud
+package com.example.democloud.entity
 
+import org.hibernate.annotations.GenericGenerator
 import java.util.*
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
-import javax.persistence.ManyToMany
-import javax.persistence.PrePersist
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.persistence.*
+import javax.validation.constraints.NotNull
+import javax.validation.constraints.Size
 
 @Entity
 class Taco {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
     var id: String = ""
 
     @NotNull
@@ -29,5 +26,9 @@ class Taco {
 
     fun addIngredient(ingredient: Ingredient) {
         ingredients.add(ingredient)
+    }
+
+    override fun toString(): String {
+        return "id=$id, name=$name, createAt=$createdAt"
     }
 }

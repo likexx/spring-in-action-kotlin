@@ -1,5 +1,7 @@
 package com.example.democloud
 
+import com.example.democloud.entity.Ingredient
+import com.example.democloud.repository.IngredientRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner
