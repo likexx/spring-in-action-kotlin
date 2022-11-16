@@ -89,6 +89,35 @@ In this example, we are going to accomplish the following goals:
     testImplementation("io.grpc:grpc-testing:$grpcJavaVersion")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
    ```
+   
+   Finally we can define the `protobuf` section in gradle:  
+   ```
+   protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:${protocVersion}"
+    }
+    plugins {
+        id("grpc") {
+            artifact = "io.grpc:protoc-gen-grpc-java:${grpcJavaVersion}"
+        }
+        id("grpckt") {
+            artifact = "io.grpc:protoc-gen-grpc-kotlin:${grpcKotlinVersion}:jdk8@jar"
+        }
+    }
+    generateProtoTasks {
+        all().forEach {
+            it.plugins {
+                id("grpc")
+                id("grpckt")
+            }
+            it.builtins {
+                id("kotlin")
+            }
+        }
+    }
+    generatedFilesBaseDir = "$projectDir/src/generated"
+   }
+   ```
 
 
 4. Create server/client code

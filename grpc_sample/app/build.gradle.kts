@@ -128,11 +128,3 @@ task("runClient", JavaExec::class) {
     classpath = sourceSets["main"].runtimeClasspath
     mainClass.set("grpc_sample.client.AppKt")
 }
-
-
-//task runServer(type: JavaExec) {
-//    group = "Execution"
-//    description = "Run the main class for Server"
-//    classpath = sourceSets.main.runtimeClasspath
-//    main = javaMainClass
-//}
