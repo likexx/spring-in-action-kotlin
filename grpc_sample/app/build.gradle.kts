@@ -14,8 +14,6 @@ buildscript {
     }
 }
 
-apply(plugin = "com.google.protobuf")
-
 plugins {
     kotlin("jvm") version "1.6.21"
     id("com.google.protobuf") version "0.9.1"
@@ -23,6 +21,8 @@ plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
 }
+
+apply(plugin = "com.google.protobuf")
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(11))
@@ -57,19 +57,14 @@ dependencies {
     // This dependency is used by the application.
     implementation("com.google.guava:guava:31.0.1-jre")
 
-    implementation("io.grpc:grpc-netty:${grpcJavaVersion}")
-//    implementation("io.grpc:grpc-protobuf:${grpcVersion}")
-//    implementation("io.grpc:grpc-stub:${grpcVersion}")
-//    implementation("com.google.protobuf:protobuf-kotlin:${protobufVersion}")
+
+    implementation("io.grpc:grpc-stub:${grpcJavaVersion}")
+    implementation("io.grpc:grpc-kotlin-stub:${grpcKotlinVersion}")
+    implementation("io.grpc:grpc-protobuf:${grpcJavaVersion}")
+
     implementation("com.google.protobuf:protobuf-java:${protobufVersion}")
-
-    api(kotlin("stdlib-jdk8"))
-
-    api("io.grpc:grpc-stub:${grpcJavaVersion}")
-    api("io.grpc:grpc-kotlin-stub:${grpcKotlinVersion}")
-    api("io.grpc:grpc-protobuf:${grpcJavaVersion}")
-    api("com.google.protobuf:protobuf-java-util:${protobufVersion}")
-    api("com.google.protobuf:protobuf-kotlin:${protobufVersion}")
+    implementation("com.google.protobuf:protobuf-java-util:${protobufVersion}")
+    implementation("com.google.protobuf:protobuf-kotlin:${protobufVersion}")
     // Use the Kotlin test library.
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     // Use the Kotlin JUnit integration.
